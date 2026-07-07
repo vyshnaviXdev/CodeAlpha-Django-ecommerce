@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CodeAlpha E-Commerce Store</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+        }
+
+        /* Navbar */
+
+        .navbar{
+            background:#111827;
+            color:white;
+            padding:18px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            position:sticky;
+            top:0;
+            z-index:1000;
+            box-shadow:0 3px 10px rgba(0,0,0,.2);
+        }
+
+        .logo{
+            font-size:30px;
+            font-weight:bold;
+            color:#f59e0b;
+        }
+
+        .menu a{
+            color:white;
+            text-decoration:none;
+            margin-left:25px;
+            font-size:17px;
+            transition:.3s;
+        }
+
+        .menu a:hover{
+            color:#f59e0b;
+        }
+
+        /* Hero */
+
+        .hero{
+            height:350px;
+            background:linear-gradient(135deg,#2563eb,#1e3a8a);
+            color:white;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+        }
+
+        .hero h1{
+            font-size:48px;
+            margin-bottom:20px;
+        }
+
+        .hero p{
+            font-size:20px;
+            margin-bottom:30px;
+        }
+
+        .shop-btn{
+            background:#f59e0b;
+            color:white;
+            padding:15px 35px;
+            text-decoration:none;
+            border-radius:8px;
+            font-size:18px;
+        }
+
+        .shop-btn:hover{
+            background:#d97706;
+        }
+
+        /* Welcome */
+
+        .welcome{
+            background:white;
+            padding:15px;
+            text-align:right;
+            box-shadow:0 2px 8px rgba(0,0,0,.1);
+        }
+
+        .welcome a{
+            text-decoration:none;
+            color:#2563eb;
+            margin-left:10px;
+            font-weight:bold;
+        }
+
+        /* Search */
+
+        .search-box{
+            text-align:center;
+            margin:30px;
+        }
+
+        .search-box input{
+            width:350px;
+            padding:12px;
+            border-radius:6px;
+            border:1px solid gray;
+        }
+
+        .search-box button{
+            padding:12px 25px;
+            background:orange;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+        }
+
+        .search-box button:hover{
+            background:#ff7700;
+        }
+
+        /* Categories */
+
+        .categories{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .cat-btn{
+            display:inline-block;
+            margin:8px;
+            padding:10px 20px;
+            background:#111827;
+            color:white;
+            text-decoration:none;
+            border-radius:30px;
+        }
+
+        .cat-btn:hover{
+            background:orange;
+        }
+
+        /* Heading */
+
+        h2{
+            text-align:center;
+            margin-top:20px;
+            font-size:35px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:gray;
+            margin-bottom:30px;
+        }
+
+        /* Products */
+
+        .products{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:30px;
+            padding:20px;
+        }
+
+        .card{
+            width:280px;
+            background:white;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 0 12px rgba(0,0,0,.15);
+            transition:.3s;
+            text-align:center;
+        }
+
+        .card:hover{
+            transform:translateY(-8px);
+        }
+
+        .card img{
+            width:100%;
+            height:230px;
+            object-fit:cover;
+        }
+
+        .card h3{
+            margin-top:15px;
+        }
+
+        .card p{
+            padding:8px;
+            color:#555;
+        }
+
+        .price{
+            color:green;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        .rating{
+            color:gold;
+            font-size:18px;
+        }
+
+        .btn{
+            display:inline-block;
+            margin:10px;
+            padding:10px 18px;
+            background:orange;
+            color:white;
+            text-decoration:none;
+            border-radius:5px;
+        }
+
+        .btn:hover{
+            background:#ff7700;
+        }
+
+        /* Footer */
+
+        footer{
+            margin-top:50px;
+            background:#111827;
+            color:white;
+            text-align:center;
+            padding:25px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🛒 CodeAlpha Store
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/cart/">Cart</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'orders' %}">My Orders</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+
+    </div>
+
+</div>
+
+<!-- Hero -->
+
+<div class="hero">
+
+    <h1>Welcome to CodeAlpha Store</h1>
+
+    <p>Discover Electronics, Fashion, Watches, Books and More</p>
+
+    <a href="#products" class="shop-btn">Shop Now</a>
+
+</div>
+
+<!-- Welcome -->
+
+{% if user.is_authenticated %}
+
+<div class="welcome">
+    Welcome <b>{{ user.username }}</b> 👋
+</div>
+
+{% endif %}
+
+<!-- Search -->
+
+<div class="search-box">
+
+<form method="GET" action="/">
+
+    <input
+        type="text"
+        name="q"
+        placeholder="Search Products..."
+        value="{{ request.GET.q }}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+</div>
+
+<!-- Categories -->
+
+<div class="categories">
+
+    <a href="/" class="cat-btn">All</a>
+
+    {% for category in categories %}
+
+        <a href="/?category={{ category.id }}" class="cat-btn">
+
+            {{ category.name }}
+
+        </a>
+
+    {% endfor %}
+
+</div>
+
+<h2>Our Products</h2>
+
+<p class="subtitle">
+Find the Best Products at Affordable Prices
+</p>
+
+<!-- Products -->
+
+<div id="products" class="products">
+
+{% for product in products %}
+
+<div class="card">
+
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+    <h3>{{ product.name }}</h3>
+
+    <p>{{ product.description }}</p>
+
+    <p class="price">
+        ₹{{ product.price }}
+    </p>
+
+    <p class="rating">
+        ⭐ {{ product.rating }}/5
+    </p>
+
+    <a href="{% url 'product_detail' product.id %}" class="btn">
+        View Details
+    </a>
+
+    <a href="{% url 'add_to_cart' product.id %}" class="btn">
+        Add to Cart
+    </a>
+
+</div>
+
+{% empty %}
+
+<h2>No Products Found 😔</h2>
+
+{% endfor %}
+
+</div>
+
+<!-- Footer -->
+
+<footer>
+
+<h3>🛒 CodeAlpha E-Commerce Store</h3>
+
+<br>
+
+<p>Email : support@codealpha.com</p>
+
+<p>Phone : +91 9876543210</p>
+
+<br>
+
+<p>© 2026 All Rights Reserved.</p>
+
+</footer>
+
+</body>
+</html>

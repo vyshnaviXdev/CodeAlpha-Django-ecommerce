@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Successful</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            text-align:center;
+            background:#f5f5f5;
+            padding-top:100px;
+        }
+
+        .box{
+            background:white;
+            width:500px;
+            margin:auto;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+
+        a{
+            text-decoration:none;
+            background:green;
+            color:white;
+            padding:10px 20px;
+            border-radius:5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+
+    <h1>🎉 Order Placed Successfully!</h1>
+
+    <p>Thank you for shopping with us.</p>
+
+    <br>
+
+    <a href="{% url 'home' %}">
+        Continue Shopping
+    </a>
+
+</div>
+
+</body>
+</html>
